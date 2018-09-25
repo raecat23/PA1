@@ -1,6 +1,6 @@
 package cs131.pa1.filter;
 
-public enum Message {
+public enum Message {//testing a comment
     WELCOME("Welcome to the Unix-ish command line.\n"),
     NEWCOMMAND("> "),
     GOODBYE("Thank you for using the Unix-ish command line. Goodbye!\n"),
