@@ -6,14 +6,23 @@ public class SequentialREPL {
 
 	static String currentWorkingDirectory;
 	String presentWorkingDirectory;
+	
 	public static void main(String[] args){
-		Scanner keyboard = new Scanner(System.in);
 		System.out.println(">Welcome to the Unix-like Command Line");
+
+		REPloop();
+	}
+	
+	/*
+	 * Houses the actual loop where commands are taken in and processed 
+	 */
+	public static void REPloop() {
+		
+		Scanner keyboard = new Scanner(System.in);
 		while(true){
 			System.out.print(" > ");
-			String input = keyboard.nextLine();
-			String [] commands = input.split("|");
-			System.out.println(printArr(commands));
+			String input = keyboard.nextLine();			
+			String [] commands = input.split("[|]");
 			for(int i = 0; i<commands.length; i++){
 				String currentCommand = commands[i].toLowerCase().trim();
 				switch(currentCommand){
@@ -33,6 +42,11 @@ public class SequentialREPL {
 		}
 	}
 	
+	
+	
+	/*
+	 * For testing purposes 
+	 */
 	public static String printArr(String [] arr) {
 		String array = "[" + arr[0];
 		for(int i = 1; i < arr.length; i++) {
