@@ -10,9 +10,10 @@ public class SequentialREPL {
 		Scanner keyboard = new Scanner(System.in);
 		System.out.println(">Welcome to the Unix-like Command Line");
 		while(true){
-			System.out.println(">What is your command?");
+			System.out.print(" > ");
 			String input = keyboard.nextLine();
 			String [] commands = input.split("|");
+			System.out.println(printArr(commands));
 			for(int i = 0; i<commands.length; i++){
 				String currentCommand = commands[i].toLowerCase().trim();
 				switch(currentCommand){
@@ -27,9 +28,17 @@ public class SequentialREPL {
 					case "exit": System.exit(-1);
 					default: //something about invalid command
 				//call each command here
-			}
+				}
 			}
 		}
+	}
+	
+	public static String printArr(String [] arr) {
+		String array = "[" + arr[0];
+		for(int i = 1; i < arr.length; i++) {
+			array = array + ", " + arr[i];
+		}
+		return array + "]";
 	}
 
 }
