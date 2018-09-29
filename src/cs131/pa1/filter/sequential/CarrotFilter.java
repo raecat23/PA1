@@ -1,11 +1,23 @@
 package cs131.pa1.filter.sequential;
 
-public class CarrotFilter extends SequentialFilter{
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 
+public class CarrotFilter extends SequentialFilter{
+	File file;
+	PrintWriter p;
 	@Override
 	protected String processLine(String line) {
-		// TODO Auto-generated method stub
+		p.write(line);
+		if(input.peek() == null){
+			p.close();
+		}
 		return null;
+	}
+	public void newFileMaker(String fileName) throws FileNotFoundException{
+		file = new File(fileName);
+		p = new PrintWriter(file);
 	}
 
 }
