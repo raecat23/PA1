@@ -1,7 +1,9 @@
 package cs131.pa1.filter.sequential;
 
 public class WCFilter extends SequentialFilter {
-	
+	//Same thing as for cat with the whole process vs process line 
+	//Because process line will be happening for each line, the variables for all the counts should be outside of methods (globally?)
+	//Then after process line runs all the times you print it out in process
 	@Override
 	protected String processLine(String line) {
 		int wordcount = 0;
