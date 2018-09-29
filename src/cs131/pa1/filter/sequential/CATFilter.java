@@ -12,6 +12,9 @@ public class CATFilter extends SequentialFilter {
 	
 	//The file name is being given to us when the user types it, so you need to make a new method to take the file and 
 	//turn it into a Queue of strings (I think each line is supposed to be a string in the queue)
+	
+	//ALSO should check if there is a this.next because if there is you can just send that badboy over to the next one as the 
+	//Queue of strings; that'll actually make the next part super easy
 	@Override
 	protected String processLine(String line) {
 		//errors to check: if its a file, if the file exists
