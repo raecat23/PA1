@@ -20,8 +20,19 @@ public class SequentialCommandBuilder {
 				cmd = command.substring(0, endCmd - 1);
 				command = command.substring(endCmd+2);
 			} else {
-				cmd = command;
-				commandProcessed = true;
+				int carrot = command.indexOf('>');
+				if(carrot == -1) {
+					cmd = command;
+					commandProcessed = true;
+				}else {
+					if(carrot == 0) {
+						cmd = command;
+						commandProcessed = true;
+					}else{
+						cmd = command.substring(0, carrot -1);
+						command = command.substring(carrot);
+					}
+				}
 			}
 			SequentialFilter next = getCommand(cmd);		
 			if(next != null) {
@@ -42,15 +53,15 @@ public class SequentialCommandBuilder {
 		}
 		SequentialFilter cmd = null;
 		switch(key) {
-			case "pwd": cmd = new PWDFilter(); break;
-			case "ls": cmd = new LSFilter(); break;
+			case "pwd": cmd = new PWDFilter(); ((PWDFilter) cmd).checkParam(command); break;
+			case "ls": cmd = new LSFilter(); ((LSFilter) cmd).checkParam(command); break;
 			case "cd": cmd = new CDFilter(); ((CDFilter) cmd).checkParam(command); break;
-			case "cat": cmd = new CATFilter(); break;
-			case "grep": cmd = new GREPFilter(); break;
-			case "wc": cmd = new WCFilter(); break;
-			case "uniq": cmd = new UNIQFilter(); break;
-			case ">": cmd = new CarrotFilter(); break;
-			case "exit": cmd = new ExitFilter(); break;
+			case "cat": cmd = new CATFilter(); ((CATFilter) cmd).checkParam(command); break;
+			case "grep": cmd = new GREPFilter(); ((GREPFilter) cmd).checkParam(command); break;
+			case "wc": cmd = new WCFilter(); ((WCFilter) cmd).checkParam(command); break;
+			case "uniq": cmd = new UNIQFilter(); ((UNIQFilter) cmd).checkParam(command); break;
+			case ">": cmd = new CarrotFilter(); ((CarrotFilter) cmd).checkParam(command); break;
+			case "exit": cmd = new ExitFilter(); ((ExitFilter) cmd).checkParam(command); break;
 		}
 		return cmd;
 	}

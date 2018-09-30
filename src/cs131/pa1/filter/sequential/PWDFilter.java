@@ -15,7 +15,9 @@ public class PWDFilter extends SequentialFilter{
 			}
 			output.add(SequentialREPL.currentWorkingDirectory);
 			if(this.next == null) {
-				System.out.println(output.remove());
+				System.out.println(output.poll());
+			}else {
+				((SequentialFilter)this.next).input = this.output;
 			}
 		}
 	}
@@ -26,4 +28,11 @@ public class PWDFilter extends SequentialFilter{
 		return null;
 	}
 
+	public void checkParam(String arg) {
+		arg = arg.trim();
+		int end = arg.indexOf(' ');
+		if(end != -1) {
+			System.out.print(Message.INVALID_PARAMETER.with_parameter("pwd"));
+		}
+	}
 }
