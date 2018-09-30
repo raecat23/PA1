@@ -1,5 +1,7 @@
 package cs131.pa1.filter.sequential;
 
+import java.util.LinkedList;
+
 import cs131.pa1.filter.Message;
 
 public class WCFilter extends SequentialFilter {
@@ -11,6 +13,9 @@ public class WCFilter extends SequentialFilter {
 		if(this.prev == null) {
 			System.out.print(Message.REQUIRES_INPUT.with_parameter("wc"));
 		}else {
+			if(output == null) {
+				output = new LinkedList<>();
+			}
 			while(!input.isEmpty()) {
 				String curr = input.poll();
 				lines++;
@@ -22,6 +27,8 @@ public class WCFilter extends SequentialFilter {
 				while(!output.isEmpty()) {
 					System.out.println(output.poll());
 				}
+			}else {
+				((SequentialFilter)this.next).input = this.output;
 			}
 		}
 	}
@@ -34,9 +41,18 @@ public class WCFilter extends SequentialFilter {
 		
 		String temp = curr;
 		int space = temp.indexOf(' ');
-		while(space != -1) {
+		while(space > -1) {
 			temp = temp.substring(space).trim();
 			words++;
+			space = temp.indexOf(' ');
+		}
+	}
+	
+	public void checkParam(String arg) {
+		arg = arg.trim();
+		int end = arg.indexOf(' ');
+		if(end != -1) {
+			System.out.print(Message.INVALID_PARAMETER.with_parameter("wc"));
 		}
 	}
 	

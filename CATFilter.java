@@ -7,13 +7,16 @@ import cs131.pa1.filter.Message;
 
 public class CATFilter extends SequentialFilter {
 	private String fileName;
+	//boolean error;
 	
 	public void process() {
 		if(this.prev != null) {
 			System.out.print(Message.CANNOT_HAVE_INPUT.with_parameter("cat"));
 		}else {
-			File catFile = new File(fileName);
+			input = new LinkedList<>();
+			output = new LinkedList<>();
 			try {
+				File catFile = new File(fileName);
 				Scanner catRead = new Scanner(catFile);
 				while(catRead.hasNextLine()) {
 					input.add(catRead.nextLine());
@@ -24,6 +27,8 @@ public class CATFilter extends SequentialFilter {
 					while(!output.isEmpty()) {
 						System.out.println(output.poll());
 					}
+				}else {
+					((SequentialFilter)this.next).input = this.output;
 				}
 				
 			} catch (FileNotFoundException e) {
@@ -38,11 +43,13 @@ public class CATFilter extends SequentialFilter {
 	}
 	
 	public void checkParam(String arg) {
+		arg = arg.trim();
 		int endCat = arg.indexOf(' ');
-		if(endCat != -1 && endCat != arg.length()-1) {
+		if(endCat != -1) {
 			fileName = arg.substring(endCat+1);
 		}else {
-			System.out.print(Message.REQUIRES_PARAMETER.with_parameter("cd"));
+			System.out.print(Message.REQUIRES_PARAMETER.with_parameter("cat"));
+			//error = true;
 		}
 	}
 

@@ -23,12 +23,22 @@ public class LSFilter extends SequentialFilter {
 				while(!output.isEmpty()) {
 					System.out.println(output.poll());
 				}
+			}else {
+				((SequentialFilter)this.next).input = this.output;
 			}
 		}
 	}
 	
 	protected String processLine(String line) {
 		return null;
+	}
+	
+	public void checkParam(String arg) {
+		arg = arg.trim();
+		int end = arg.indexOf(' ');
+		if(end != -1) {
+			System.out.print(Message.INVALID_PARAMETER.with_parameter("ls"));
+		}
 	}
 
 }

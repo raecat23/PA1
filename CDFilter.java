@@ -34,8 +34,9 @@ public class CDFilter extends SequentialFilter {
 	}
 	
 	public void checkParam(String arg) {
+		arg = arg.trim();
 		int endCD = arg.indexOf(' ');
-		if(endCD != -1 && endCD != arg.length()-1) {
+		if(endCD != -1) {
 			newDir = arg.substring(endCD+1);
 		}else {
 			System.out.print(Message.REQUIRES_PARAMETER.with_parameter("cd"));

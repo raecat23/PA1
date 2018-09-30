@@ -21,6 +21,8 @@ public class GREPFilter extends SequentialFilter {
 				while(!output.isEmpty()) {
 					System.out.println(output.poll());
 				}
+			}else {
+				((SequentialFilter)this.next).input = this.output;
 			}
 		}
 	}
@@ -33,8 +35,9 @@ public class GREPFilter extends SequentialFilter {
 	}
 	
 	public void checkParam(String arg) {
+		arg = arg.trim();
 		int endGrep = arg.indexOf(' ');
-		if(endGrep != -1 && endGrep != arg.length()-1) {
+		if(endGrep != -1) {
 			search = arg.substring(endGrep+1);
 		}else {
 			System.out.print(Message.REQUIRES_PARAMETER.with_parameter("grep"));

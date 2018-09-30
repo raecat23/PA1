@@ -9,16 +9,15 @@ public class UNIQFilter extends SequentialFilter {
 	public void process() {
 		if(this.prev == null) {
 			System.out.print(Message.REQUIRES_INPUT.with_parameter("uniq"));
-		}else{
-			if(output == null) {
-				output = new LinkedList<>();
-			}
+		}else {
+			output = new LinkedList<>();
 			super.process();
-			
 			if(this.next == null) {
 				while(!output.isEmpty()) {
 					System.out.println(output.poll());
 				}
+			}else {
+				((SequentialFilter)this.next).input = this.output;
 			}
 		}
 	}
@@ -28,5 +27,13 @@ public class UNIQFilter extends SequentialFilter {
 			return line;
 		}
 		return null;
+	}
+	
+	public void checkParam(String arg) {
+		arg = arg.trim();
+		int end = arg.indexOf(' ');
+		if(end != -1) {
+			System.out.print(Message.INVALID_PARAMETER.with_parameter("uniq"));
+		}
 	}
 }
