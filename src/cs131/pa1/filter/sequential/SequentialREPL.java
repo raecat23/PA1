@@ -1,5 +1,6 @@
 package cs131.pa1.filter.sequential;
 
+import java.util.*;
 import java.util.Scanner;
 
 import cs131.pa1.filter.Message;
@@ -7,11 +8,10 @@ import cs131.pa1.filter.Message;
 public class SequentialREPL {
 
 	static String currentWorkingDirectory;
-	String presentWorkingDirectory;
 	
 	public static void main(String[] args){
-		System.out.println(Message.WELCOME);
-
+		System.out.print(Message.WELCOME);
+		currentWorkingDirectory = System.getProperty("user.dir");
 		REPloop();
 	}
 	
@@ -25,8 +25,18 @@ public class SequentialREPL {
 		while(moreCommands){
 			System.out.print(Message.NEWCOMMAND);
 			String input = keyboard.nextLine();			
-			//Send input to Command Builder here
+			List<SequentialFilter> commands = SequentialCommandBuilder.createFiltersFromCommand(input);
+			if(commands != null && commands.size() > 1) {
+				for(int i = 1; i < commands.size(); i++) {
+					commands.get(i-1).setNextFilter(commands.get(i));
+				}
+			}
 			
+			if(commands != null) {				
+				for(int i = 0; i < commands.size(); i++) {
+					commands.get(i).process();
+				}
+			}
 		}
 	}
 	
