@@ -40,7 +40,7 @@ public class GREPFilter extends SequentialFilter {
 		if(endGrep != -1) {
 			search = arg.substring(endGrep+1);
 		}else {
-			System.out.print(Message.REQUIRES_PARAMETER.with_parameter("grep"));
+			System.out.print(Message.REQUIRES_PARAMETER.with_parameter("arg"));
 		}
 	}
 

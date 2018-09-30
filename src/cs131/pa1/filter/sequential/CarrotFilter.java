@@ -43,7 +43,7 @@ public class CarrotFilter extends SequentialFilter{
 		if(endCar != -1) {
 			fileName = arg.substring(endCar+1);
 		}else {
-			System.out.print(Message.REQUIRES_PARAMETER.with_parameter(">"));
+			System.out.print(Message.REQUIRES_PARAMETER.with_parameter("arg"));
 		}
 	}
 

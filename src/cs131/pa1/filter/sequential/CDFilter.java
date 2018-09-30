@@ -39,7 +39,7 @@ public class CDFilter extends SequentialFilter {
 		if(endCD != -1) {
 			newDir = arg.substring(endCD+1);
 		}else {
-			System.out.print(Message.REQUIRES_PARAMETER.with_parameter("cd"));
+			System.out.print(Message.REQUIRES_PARAMETER.with_parameter("arg"));
 		}
 	}
 	

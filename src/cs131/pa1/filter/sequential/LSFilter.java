@@ -37,7 +37,7 @@ public class LSFilter extends SequentialFilter {
 		arg = arg.trim();
 		int end = arg.indexOf(' ');
 		if(end != -1) {
-			System.out.print(Message.INVALID_PARAMETER.with_parameter("ls"));
+			System.out.print(Message.INVALID_PARAMETER.with_parameter("arg"));
 		}
 	}
 

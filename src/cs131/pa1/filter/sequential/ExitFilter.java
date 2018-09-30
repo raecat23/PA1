@@ -30,7 +30,7 @@ public class ExitFilter extends SequentialFilter{
 		arg = arg.trim();
 		int endCat = arg.indexOf(' ');
 		if(endCat != -1) {
-			System.out.print(Message.INVALID_PARAMETER.with_parameter("exit"));
+			System.out.print(Message.INVALID_PARAMETER.with_parameter("arg"));
 		}
 	}
 	

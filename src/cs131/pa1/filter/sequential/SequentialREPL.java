@@ -8,6 +8,7 @@ import cs131.pa1.filter.Message;
 public class SequentialREPL {
 
 	static String currentWorkingDirectory;
+	private static Scanner keyboard;
 	
 	public static void main(String[] args){
 		System.out.print(Message.WELCOME);
@@ -20,18 +21,13 @@ public class SequentialREPL {
 	 */
 	public static void REPloop() {
 		
-		Scanner keyboard = new Scanner(System.in);
+		keyboard = new Scanner(System.in);
 		boolean moreCommands = true;
 		while(moreCommands){
 			System.out.print(Message.NEWCOMMAND);
 			String input = keyboard.nextLine();			
 			List<SequentialFilter> commands = SequentialCommandBuilder.createFiltersFromCommand(input);
-			if(commands != null && commands.size() > 1) {
-				for(int i = 1; i < commands.size(); i++) {
-					commands.get(i-1).setNextFilter(commands.get(i));
-				}
-			}
-			
+					
 			if(commands != null) {				
 				for(int i = 0; i < commands.size(); i++) {
 					commands.get(i).process();

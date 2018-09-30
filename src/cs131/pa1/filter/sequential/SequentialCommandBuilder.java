@@ -41,7 +41,8 @@ public class SequentialCommandBuilder {
 				System.out.print(Message.COMMAND_NOT_FOUND.with_parameter(cmd));
 				return null;
 			}
-		}		
+		}	
+		linkFilters(cmds);
 		return cmds;
 	}
 	
@@ -66,19 +67,13 @@ public class SequentialCommandBuilder {
 		return cmd;
 	}
 	
-	private static SequentialFilter determineFinalFilter(String command){
-		return null;
-	}
-	
-	private static String adjustCommandToRemoveFinalFilter(String command){
-		return null;
-	}
-	
-	private static SequentialFilter constructFilterFromSubCommand(String subCommand){
-		return null;
-	}
-
 	private static boolean linkFilters(List<SequentialFilter> filters){
+		if(filters != null && filters.size() > 1) {
+			for(int i = 1; i < filters.size(); i++) {
+				filters.get(i-1).setNextFilter(filters.get(i));
+			}
+			return true;
+		}
 		return false;
 	}
 }

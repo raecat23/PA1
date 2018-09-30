@@ -48,7 +48,7 @@ public class CATFilter extends SequentialFilter {
 		if(endCat != -1) {
 			fileName = arg.substring(endCat+1);
 		}else {
-			System.out.print(Message.REQUIRES_PARAMETER.with_parameter("cat"));
+			System.out.print(Message.REQUIRES_PARAMETER.with_parameter("arg"));
 			//error = true;
 		}
 	}

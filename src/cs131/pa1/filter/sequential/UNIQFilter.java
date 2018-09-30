@@ -33,7 +33,7 @@ public class UNIQFilter extends SequentialFilter {
 		arg = arg.trim();
 		int end = arg.indexOf(' ');
 		if(end != -1) {
-			System.out.print(Message.INVALID_PARAMETER.with_parameter("uniq"));
+			System.out.print(Message.INVALID_PARAMETER.with_parameter("arg"));
 		}
 	}
 }
